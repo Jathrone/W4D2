@@ -1,0 +1,43 @@
+<% 
+if action == :new
+    form_action = cats_url
+    submit_txt = "You can build it"
+else
+    form_action = cat_url(kat)
+    submit_txt = "Update!"
+end
+%>
+
+<form action="<%= form_action %>" method='post'>
+    <% if action == :edit %>
+        <input type="hidden" name="_method" value="patch">
+    <% end %>
+    <label>Name:
+        <input type="text" name="cat[name]" value="<%=kat.name%>">
+    </label>
+    <br><br>
+    <label>Sex:
+        <input type="radio" name="cat[sex]" value="M" <%= kat.sex == "M" ? "checked" : "" %> >Male
+        <input type="radio" name="cat[sex]" value="F" <%= kat.sex == "F" ? "checked" : "" %> >Female
+    </label>
+    <br><br>
+    <label>Color:
+        <select name="cat[color]">
+            <option disabled="disabled" <%= "selected" if kat.color == nil %>>--Please Select--</option>
+            <option value="WHITE" <%= "selected" if kat.color == "WHITE" %>>WHITE</option>
+            <option value="ORANGE" <%= "selected" if kat.color == "ORANGE" %>>ORANGE</option>
+            <option value="BROWN" <%= "selected" if kat.color == "BROWN" %>>BROWN</option>
+            <option value="BLACK" <%= "selected" if kat.color == "BLACK" %>>BLACK</option>
+        </select>
+    </label>
+    <br><br>
+    <label>Birth Date:
+        <input type="date" name="cat[birth_date]" value=<%=kat.birth_date%>>
+    </label>
+    <br><br>
+    <label>Description:
+        <textarea name="cat[description]"><%=kat.description%></textarea>
+    </label>
+    <br><br>
+    <input type="submit" value="<%= submit_txt %>">
+</form>

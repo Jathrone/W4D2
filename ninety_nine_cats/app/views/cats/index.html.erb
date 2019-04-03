@@ -1,0 +1,9 @@
+<h1>Here Be Kitties!</h1>
+
+<% @cats.each do |single_cat| %>
+    <h2><%= single_cat.name %></h2>
+    <%= render 'cat', kat: single_cat %>
+    <br>
+    <a href="<%= cat_url(single_cat) %>">Visit My Page</a>
+    <br>
+<% end %>
